@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# Markdown Editor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+一个 Markdown 在线编辑器，无隐私泄漏，支持移动端、下载。
 
-## Available Scripts
+## 使用方法
 
-In the project directory, you can run:
+点开即可使用
 
-### `npm start`
+## 特点
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. 完全使用 Markdown 语法
+1. 开箱即用，无需注册，无后端，无隐私泄漏
+1. 支持移动端、下载 MD等
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 获取用户信息
 
-### `npm test`
+本网站不会获取用户的个人信息。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 利用用户信息
 
-### `npm run build`
+本网站不使用使用者的个人信息。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 用户信息的第三方提供
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+本网站不会向第三方提供使用者的个人信息。
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 使用工具
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+本网站使用 Google Analytics（Google Inc.）作为分析工具，Google Analytics 可能会自动获取使用者的信息。关于获取的信息、使用目的、向第三方提供等，请根据分析经营者的隐私政策进行确认。
