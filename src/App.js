@@ -188,22 +188,6 @@ const MarkDownEditor = () => {
     }
   }, [currentLanguage, t.title, t.sequenceDiagram]);
 
-  // 初始化 Mermaid
-  // useEffect(() => {
-  //   mermaid.initialize({
-  //     startOnLoad: true,
-  //     theme: "dark",
-  //     securityLevel: "loose",
-  //     flowchart: {
-  //       useMaxWidth: true,
-  //       htmlLabels: true,
-  //     },
-  //     sequence: {
-  //       useMaxWidth: true,
-  //     },
-  //   });
-  // }, []);
-
   // 自动保存
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -649,20 +633,14 @@ flowchart TD
     }
 
     return (
-      <div className="relative my-4 group">
-        <div className="absolute top-0 left-0 right-0 h-8 flex items-center px-4 bg-gray-800 border-b border-gray-700 rounded-t-lg">
-          <div className="flex space-x-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
-            <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
-          </div>
-        </div>
-        <pre className="rounded-lg overflow-x-auto pt-10 border border-gray-700 bg-gray-800">
-          <code className="hljs" {...props}>
-            {children}
-          </code>
-        </pre>
-      </div>
+      <>
+        <code
+          className="px-2 py-1 bg-gray-800 rounded text-sm text-gray-100 font-mono"
+          {...props}
+        >
+          {children}
+        </code>
+      </>
     );
   };
 
@@ -1026,7 +1004,10 @@ flowchart TD
               <div className="p-4 md:p-6">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm, remarkMath]}
-                  rehypePlugins={[rehypeKatex, rehypeHighlight]}
+                  rehypePlugins={[
+                    rehypeKatex,
+                    [rehypeHighlight, { detect: true, ignoreMissing: true }],
+                  ]}
                   components={{
                     // 响应式标题样式
                     h1: ({ children, ...props }) => (
@@ -1071,7 +1052,8 @@ flowchart TD
                         {children}
                       </p>
                     ),
-
+                    // 确保 pre 标签正确传递
+                    pre: ({ children }) => <>{children}</>,
                     // 列表组件
                     ul: (props) => (
                       <ListComponent {...props} ordered={false} depth={0} />
