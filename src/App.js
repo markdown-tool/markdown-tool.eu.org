@@ -4,6 +4,7 @@ import remarkGfm from "remark-gfm";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import rehypeHighlight from "rehype-highlight";
+import rehypeRaw from "rehype-raw";
 import mermaid from "mermaid";
 import "katex/dist/katex.min.css";
 import "highlight.js/styles/atom-one-dark.css";
@@ -225,7 +226,7 @@ const MarkDownEditor = () => {
     for (let i = 1; i <= lineCount; i++) {
       const lineDiv = document.createElement("div");
       lineDiv.className =
-        "text-right pr-3 text-gray-500 text-sm select-none hover:text-gray-300 transition-colors";
+        "text-right pr-3 text-gray-500 text-sm hover:text-gray-300 transition-colors";
       lineDiv.style.height = "1.75rem";
       lineDiv.style.lineHeight = "1.75rem";
       lineDiv.textContent = i.toString();
@@ -612,23 +613,25 @@ flowchart TD
 
     if (!inline && match) {
       return (
-        <div className="relative my-4 group">
-          <div className="absolute top-0 left-0 right-0 h-8 flex items-center px-4 bg-gray-800 border-b border-gray-700 rounded-t-lg">
-            <div className="flex space-x-1.5">
-              <div className="w-3 h-3 rounded-full bg-red-500"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div className="w-3 h-3 rounded-full bg-green-500"></div>
+        <>
+          <div className="relative my-4 group">
+            <div className="absolute top-0 left-0 right-0 h-8 flex items-center px-4 bg-gray-800 border-b border-gray-700 rounded-t-lg">
+              <div className="flex space-x-1.5">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
             </div>
+            <div className="absolute top-0 right-0 px-3 py-1 text-xs rounded-bl-lg bg-gray-800 text-gray-400 border-l border-b border-gray-700">
+              {language}
+            </div>
+            <pre className="rounded-lg overflow-x-auto pt-10 border border-gray-700 bg-gray-800">
+              <code className={`hljs language-${language}`} {...props}>
+                {children}
+              </code>
+            </pre>
           </div>
-          <div className="absolute top-0 right-0 px-3 py-1 text-xs rounded-bl-lg bg-gray-800 text-gray-400 border-l border-b border-gray-700">
-            {language}
-          </div>
-          <pre className="rounded-lg overflow-x-auto pt-10 border border-gray-700 bg-gray-800">
-            <code className={`hljs language-${language}`} {...props}>
-              {children}
-            </code>
-          </pre>
-        </div>
+        </>
       );
     }
 
@@ -685,13 +688,13 @@ flowchart TD
   return (
     <div
       ref={containerRef}
-      className="min-h-screen bg-gray-900 text-gray-100 select-none"
+      className="min-h-screen bg-gray-900 text-gray-100"
       style={{
         cursor: dragState.current.isDragging ? "col-resize" : "default",
       }}
     >
       {/* 顶部工具栏 */}
-      <header className="border-b border-gray-700 bg-gray-800 sticky top-0 z-40">
+      <header className="border-b border-gray-700 bg-gray-800 sticky top-0 z-40 select-none">
         <div className="max-w-full mx-auto px-3 md:px-4 py-2 md:py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 md:space-x-6">
@@ -941,7 +944,7 @@ flowchart TD
             {/* 编辑区域 */}
             <div className="flex-1 flex flex-col">
               {!isMobile && (
-                <div className="flex items-center justify-between px-4 md:px-6 py-3 border-b border-gray-700 text-gray-400 flex-shrink-0">
+                <div className="flex items-center justify-between px-4 md:px-6 py-3 border-b border-gray-700 text-gray-400 flex-shrink-0  select-none">
                   <span className="text-sm font-medium">{t.editor}</span>
                   <span className="text-xs">{t.markdownSyntax}</span>
                 </div>
@@ -996,7 +999,7 @@ flowchart TD
         >
           <div className="flex-1 flex flex-col h-full">
             {!isMobile && (
-              <div className="sticky top-0 px-4 md:px-6 py-3 border-b border-gray-700 bg-gray-900 text-gray-400 z-10">
+              <div className="sticky top-0 px-4 md:px-6 py-3 border-b border-gray-700 bg-gray-900 text-gray-400 z-10 select-none">
                 <span className="text-sm font-medium">{t.preview}</span>
               </div>
             )}
@@ -1004,10 +1007,7 @@ flowchart TD
               <div className="p-4 md:p-6">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm, remarkMath]}
-                  rehypePlugins={[
-                    rehypeKatex,
-                    [rehypeHighlight, { detect: true, ignoreMissing: true }],
-                  ]}
+                  rehypePlugins={[rehypeKatex, rehypeHighlight, rehypeRaw]}
                   components={{
                     // 响应式标题样式
                     h1: ({ children, ...props }) => (
@@ -1105,6 +1105,12 @@ flowchart TD
                       </td>
                     ),
 
+                    a: ({ children, ...props }) => (
+                      <a className="text-blue-500 hover:underline" {...props}>
+                        {children}
+                      </a>
+                    ),
+
                     // 代码块
                     code: CodeBlock,
 
@@ -1132,7 +1138,7 @@ flowchart TD
 
       {/* 底部状态栏 */}
       <footer className="fixed bottom-0 left-0 right-0 border-t border-gray-700 bg-gray-800 py-2 px-3 md:px-4 text-xs text-gray-400 z-30">
-        <div className="flex justify-between items-center max-w-full mx-auto">
+        <div className="flex justify-between items-center max-w-full mx-auto select-none">
           <span className="hidden md:block">
             {isMobile
               ? `📱 ${t.mobileMode}`
